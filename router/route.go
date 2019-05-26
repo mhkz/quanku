@@ -10,10 +10,11 @@ func Route(app *gin.Engine) {
 
 	apiV1 := app.Group("api/v1")
 	{
-		apiV1.GET("/articles", articler.GetArticles)
-		apiV1.POST("/articles", articler.AddArticle)
-		apiV1.PUT("/articles/:id", articler.EditArticle)
-		apiV1.DELETE("/articles/:id", articler.DeleteArticle)
+		apiV1.GET("/articles", articler.GetArticles) // 获取文章列表
+		apiV1.GET("/articles/:id", articler.GetArticles) // 获取指定文章
+		apiV1.POST("/articles", articler.AddArticle) // 新增文章
+		apiV1.PUT("/articles/:id", articler.EditArticle) // 修改文章
+		apiV1.DELETE("/articles/:id", articler.DeleteArticle) // 删除文章
 
 		//================ 标签路由 ==========================
 		apiV1.GET("/tags", tag.GetTags)
