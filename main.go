@@ -24,6 +24,7 @@ func main() {
 	app.Use(gin.Logger())
 	app.Use(gin.Recovery())
 	gin.SetMode(setting.RunMode)
+
 	//================ 注册路由  ============
 	router.Route(app)
 
