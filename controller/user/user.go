@@ -2,10 +2,11 @@ package user
 
 import "github.com/gin-gonic/gin"
 
-func LoginHandler(c *gin.Context)  {
-	
+
+func RegisterHandler(c *gin.Context)  {
+	// 邮箱注册
 }
 
-func ResigerHandler(c *gin.Context)  {
-
+func LoginHandler(c *gin.Context)  {
+	
 }

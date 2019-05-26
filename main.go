@@ -1,8 +1,11 @@
 package main
 
 import (
+	"fmt"
 	"github.com/gin-gonic/gin"
+	"github.com/quanku/pkg/setting"
 	"github.com/quanku/router"
+	"net/http"
 )
 
 func initTemplate(router *gin.Engine)  {
@@ -16,6 +19,21 @@ func initTemplate(router *gin.Engine)  {
 
 func main() {
 	app := gin.New()
+
+	//================ 注册中间件 ===========
+	app.Use(gin.Logger())
+	app.Use(gin.Recovery())
+	gin.SetMode(setting.RunMode)
+	//================ 注册路由  ============
 	router.Route(app)
-	app.Run(":8002")
+
+	s := &http.Server{
+		Addr:           fmt.Sprintf(":%d", setting.HTTPPort),
+		Handler:        app,
+		ReadTimeout:    setting.ReadTimeout,
+		WriteTimeout:   setting.WriteTimeout,
+		MaxHeaderBytes: 1 << 20,
+	}
+
+	s.ListenAndServe()
 }
