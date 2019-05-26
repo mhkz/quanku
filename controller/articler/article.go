@@ -45,7 +45,6 @@ func GetArticles(c *gin.Context) {
 	data := make(map[string]interface{})
 	maps := make(map[string]interface{})
 	valid := validation.Validation{}
-
 	var state int = -1
 	if arg := c.Query("state"); arg != "" {
 		state = com.StrTo(arg).MustInt()

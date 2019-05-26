@@ -5,6 +5,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/quanku/models"
 	"github.com/quanku/pkg/e"
+	"github.com/quanku/pkg/logging"
 	"github.com/quanku/pkg/util"
 	"log"
 	"net/http"
@@ -21,7 +22,6 @@ func GetAuth(c *gin.Context) {
 	valid := validation.Validation{}
 	a := auth{Username: username, Password: password}
 	ok, _ := valid.Valid(&a)
-
 	data := make(map[string]interface{})
 	code := e.INVALID_PARAMS
 	if ok {
@@ -41,6 +41,7 @@ func GetAuth(c *gin.Context) {
 		}
 	} else {
 		for _, err := range valid.Errors {
+			logging.Info(err.Key, err.Message)
 			log.Println(err.Key, err.Message)
 		}
 	}
